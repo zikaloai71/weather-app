@@ -1,0 +1,62 @@
+*{
+  margin: 0;
+}
+body {
+  height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  align-self: baseline;
+  justify-content: space-around;
+    background-repeat: no-repeat;
+     background-size:100% 100%;
+}
+  
+form{
+  margin-top: 0.2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(54, 101, 101);
+  width:30% ;
+  color: white;
+  padding: 2em;
+  border-radius: 5px;
+  
+}
+ label{
+   font-size: larger;
+font-style: oblique;
+margin-bottom: 1em;
+ }
+ #city{
+  border: 0px;
+  outline: none;
+  border-radius: 5px;
+  width: 40%;
+  color: white;
+  background-color: rgb(169, 164, 164);
+ }
+ #submit-city{
+   margin-top: 1em;
+ }
+#info-card{
+  margin-top: 0.2em;
+  background-color: rgb(54, 101, 101);
+  width:30% ;
+  color: white;
+  padding: 2em;
+  border-radius: 5px;
+  text-align: center;
+  width: 30%;
+
+}
+#info-card h1 {
+  margin-bottom: 0.2em;
+}
+#info-card p{
+  margin-top: 0.5em;
+}
+.display-none{
+  display: none;
+}
+
