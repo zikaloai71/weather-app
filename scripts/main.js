@@ -2,8 +2,14 @@ let cityInput = document.getElementById("city");
 let submitCity = document.getElementById("submit-city");
 let body = document.getElementsByTagName('body')[0];
 let infoCard = document.getElementById('info-card');
+let loading = document.getElementsByClassName('sk-chase')[0];
+
 submitCity.addEventListener("click", (e) => {
-  e.preventDefault();
+e.preventDefault();
+loading.classList.remove('display-none');
+setTimeout(()=>{
+  loading.classList.add('display-none');
+ },1000)
  let city = cityInput.value.toUpperCase();
  getCity(city);
 });
@@ -15,9 +21,13 @@ async function getCity(city) {
     let data = await response.json();
     showInfo(data.name,data.weather[0].main,data.weather[0].description,data.main.temp);
     getGif(data.weather[0].main);
+    console.log(response)
   }
   catch(err){
-    console.log(err);
+    infoCard.classList.remove('display-none');
+    infoCard.removeAttribute('id','info-card');
+    infoCard.classList.add('error');
+    infoCard.innerHTML='check your spelling for city or your internet connection';
   }
 }
 
@@ -27,15 +37,19 @@ async function getCity(city) {
     let response = await fetch(url, { mode: "cors" });
     let data = await response.json();
     body.style.backgroundImage =`url(${data.data.images.original.url})`;
+    
   }
   catch(err){
+    
     console.log(err);
   }
 }
 
-function showInfo(cityName,weatherMain,weatherDescription,temp,sym='°F'){
-  infoCard.innerHTML=`<h1>city you choose : ${cityName}</h1><h2>the weather is ${weatherMain}</h2><p>It's ${weatherDescription}</p><p id="degree">It's ${temp} ${sym}</p><button id='changeDegree'> change F to C </button>`
+function showInfo(cityName,weatherMain,weatherDescription,temp,sym='°F',text='change F to C'){
+  infoCard.innerHTML=`<h1>city you choose : ${cityName}</h1><h2>the weather is ${weatherMain}</h2><p>It's ${weatherDescription}</p><p id="degree">It's ${temp} ${sym}</p><button id='changeDegree'> ${text} </button>`
   infoCard.classList.remove('display-none');
+  infoCard.classList.remove('error');
+  infoCard.setAttribute('id','info-card')
 
   let toggleDegree=document.getElementById('changeDegree');
   let tempDegree=document.getElementById('degree');
@@ -43,11 +57,12 @@ function showInfo(cityName,weatherMain,weatherDescription,temp,sym='°F'){
   toggleDegree.addEventListener('click',()=>{
   if(tempDegree.innerText.includes('°F')){
     temp=fToC(temp);
-    showInfo(cityName,weatherMain,weatherDescription,temp,"°C")
+    showInfo(cityName,weatherMain,weatherDescription,temp,"°C",'change C to F')
+    
   }
   else{
     temp=cToF(temp);
-    showInfo(cityName,weatherMain,weatherDescription,temp,"°F")
+    showInfo(cityName,weatherMain,weatherDescription,temp,"°F",'change F to C');
   }
   })
   
