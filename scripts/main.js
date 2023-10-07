@@ -16,7 +16,7 @@ setTimeout(()=>{
 
 async function getCity(city) {
   try{
-    let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&APPID=615d9a39960a08f8647ec3a42b7937fe`;
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&APPID=615d9a39960a08f8647ec3a42b7937fe`;
     let response = await fetch(url, { mode: "cors" });
     let data = await response.json();
     showInfo(data.name,data.weather[0].main,data.weather[0].description,data.main.temp);
